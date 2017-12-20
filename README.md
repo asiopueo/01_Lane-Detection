@@ -33,7 +33,7 @@ In the second step, we first add some Gaussian blur, followed by an application 
 The lanes on both sides of the road are easily recognizable.  In addition, there are reflectors between the lines visible (*Bott's dots*?).
 
 
-** Stage 3: Region of Interest**
+**Stage 3: Region of Interest**
 Since we are only interested in the lanes, we apply a mask in order to delete everything which could lead to confusion.  The mask consists of an polygon (more precisely a trapezoid) with the vertices (in counter-clockwise order, starting from the bottom-right): $(960,540), (500,325),(460,325),$ and $(0,540)$.
 This results in the following image:
 ![alt text][image4]
