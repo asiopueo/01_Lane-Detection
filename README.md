@@ -13,7 +13,8 @@ The goals / steps of this project are the following:
 [image3]: ./images/stage2_image.png "Grayscale"
 [image4]: ./images/stage3_image.png "Grayscale"
 [image5]: ./images/stage4_image.png "Grayscale"
-[image6]: ./final_result.png "Grayscale"
+[image6]: ./images/final_result.png "Grayscale"
+
 ---
 
 ### 1. Describe your pipeline. As part of the description, explain how you modified the draw_lines() function.
@@ -47,9 +48,17 @@ and
 
 ![](./images/linear_equations_right.png)
 
-In other words, we have two families of parameters $\{(m_i, b_i)\mid i=1,\ldots;N_\mathrm{left}\}$ for the left lane and $\{(\mu_j,\beta_j)\mid 1,\ldots,N_\mathrm{right}\}$ for the right lane.  Note that the gradients for the left lane, $m_i$, are negative and for those for the right lane, $\mu_i$, are positive due to our choice of coordinates.
+In other words, we have two families of parameters ![](./images/set_parameter_left.png) for the left lane and ![](./images/set_parameter_right.png) for the right lane.  Note that the gradients for the left lane, ![](./images/m_i.png), are negative and for those for the right lane, ![](./images/mu_j.png), are positive due to our choice of coordinates.
 
-In order to draw two solid lines, we average the line segments on the left lane ![](./images/set_parameter_left.png) and the line segments of the right lane ![](./images/set_parameter_right.png).  This yields two lines characterized by the gradients
+In order to draw two solid lines, we average the line segments on the left lane
+
+![](./images/set_parameter_left.png)
+
+and the line segments of the right lane
+
+![](./images/set_parameter_right.png)  
+
+This yields two lines characterized by the gradients
 
 ![](./images/average_slope_left.png)
 
@@ -57,19 +66,19 @@ and
 
 ![](./images/average_slope_right.png)
 
-The y-tersections are calculated analogously, i.e. ![](./images/average_y_intersection_left.png) and ![](./images/average_y_intersection_right.png) are the averages over $b_i$, $\beta_j$, respectively.
+The y-intersections are calculated analogously, i.e. ![](./images/average_y_intersection_left.png) and ![](./images/average_y_intersection_right.png) are the averages over ![](./images/b_i.png), ![](./images/beta_j.png), respectively.
 
-Now that we have two lines $y=\overline{m}x+\overline{b}$ and $y=\overline{\mu}x+\overline{\beta}$, we need to know where to start and stop drawing them on the screen.  We only onsider the left line, the right one goes analogously:  Since we may assume $\overline{m}\not=0$, we can consider:
+Now that we have two lines ![](./images/average_eqn_left.png) and ![](./images/average_eqn_right.png), we need to know where to start and stop drawing them on the screen.  We only onsider the left line, the right one goes analogously:  Since we may assume ![](./images/overline_m.png), we can consider:
 
-$x = (y-\overline{b})/\overline{m}$.
+![](./images/x_equation.png)
 
-Setting $y_\mathrm{top}=325$ and $y_\mathrm{bottom}=540$ for the top and bottom edges of our *region of interest*, we can now calculate:
+Setting ![](./images/y_top.png) and ![](./images/y_bottom.png) for the top and bottom edges of our *region of interest*, we can now calculate:
 
-$x_\mathrm{top} = (y_\mathrm{top}-\overline{b})/\overline{m}$
+![](./images/x_top_equation.png)
 
 and
 
-$x_\mathrm{bottom} = (y_\mathrm{bottom}-\overline{b})/\overline{m}$
+![](./images/x_bottom_equation.png)
 
 The lines can now be drawn with the help of the OpenCV-routines:
 
